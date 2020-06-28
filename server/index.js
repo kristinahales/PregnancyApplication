@@ -5,7 +5,7 @@ const massive = require('massive');
 const path = require('path');
 const uc = require('./controllers/user_controller');
 const authmw = require('./middleware/authCheck');
-const bc = require('./controllers/baby_controller');
+const pdc = require('./controllers/pregnancy_details_controller');
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
 
 const app = express()
@@ -35,6 +35,6 @@ app.delete('/api/logout', uc.logout);
 app.get('/api/user', authmw, uc.getUser);
 
 //babydetails endpoints 
-app.get('/api/babydetails', bc.getAllBabyDetails);
+app.get('/api/pregnancydetails', pdc.getPregDetails);
 
 

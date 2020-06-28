@@ -21,17 +21,8 @@ class Login extends React.Component {
         this.login = this.login.bind(this);
         this.register = this.register.bind(this);
     }
-    componentDidMount() {
-        axios.get('/api/babydetails')
-        .then(res => {
-            this.setState({
-                babydetails: res.data
-            })
-        })
-    }
 
     handleChange(e) {
-        console.log('hi')
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -51,7 +42,14 @@ class Login extends React.Component {
             this.resetInput();
         })
     }
-
+    componentDidMount() {
+        axios.get('/api/babydetails')
+        .then(res => {
+            this.setState({
+                babydetails: res.data
+            })
+        })
+    }
     register() {
         this.props.register(this.state.firstname, this.state.lastname, this.state.username, this.state.password)
         .catch(() => {
