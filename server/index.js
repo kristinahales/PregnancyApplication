@@ -3,6 +3,9 @@ const express = require('express');
 const session = require('express-session');
 const massive = require('massive');
 const path = require('path');
+const uc = require('./controllers/user_controller');
+const authmw = require('./middleware/authCheck');
+const bc = require('./controllers/baby_controller');
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
 
 const app = express()
@@ -24,5 +27,14 @@ massive(CONNECTION_STRING)
     });
 })
 .catch(error => console.log(error))
+
+//user endpoints
+app.post('/api/login', uc.login);
+app.post('/api/register', uc.register);
+app.delete('/api/logout', uc.logout);
+app.get('/api/user', authmw, uc.getUser);
+
+//babydetails endpoints 
+app.get('/api/babydetails', bc.getAllBabyDetails);
 
 

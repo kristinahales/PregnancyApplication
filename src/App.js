@@ -1,14 +1,15 @@
 import React from 'react';
 import './App.css';
+import routes from './routes'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        Pregnancy Application
-      </header>
-    </div>
-  );
+function App() {    
+    return (
+      <div>
+        {routes}
+        
+        
+      </div>
+    );
 }
 
 export default App;
