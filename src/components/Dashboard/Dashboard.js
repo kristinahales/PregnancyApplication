@@ -8,6 +8,7 @@ class Dashboard extends Component {
         super()
         this.state = {
             pregnancydetails: []
+            
         }
     }
 
@@ -15,7 +16,7 @@ class Dashboard extends Component {
         axios.get('/api/pregnancydetails')
         .then(res => {
             this.setState({
-                babydetails: res.data
+                pregnancydetails: res.data
             })
         })
     }

@@ -3,10 +3,6 @@ import {connect} from 'react-redux';
 import {logout} from './../../redux/userReducer';
 
 class Header extends React.Component {
-    constructor() {
-        super()
-    }
-
     logout = () => {
         this.props.logout();
     }

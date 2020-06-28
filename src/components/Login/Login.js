@@ -13,9 +13,7 @@ class Login extends React.Component {
             username: '',
             password: '',
             firstname: '',
-            lastname: '',
-            babydetails: []
-        }
+            lastname: ''        }
         this.handleChange = this.handleChange.bind(this);
 
         this.login = this.login.bind(this);
@@ -62,7 +60,6 @@ class Login extends React.Component {
         let {firstname, lastname, username, password} = this.state
         let { user } = this.props;
         if (user.loggedIn) return <Redirect to="/" />;
-        console.log(this.state.babydetails)
         return (
             <div>
                 <div className='main-container'>
