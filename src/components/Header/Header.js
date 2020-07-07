@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {logout} from './../../redux/userReducer';
+import './Header.css';
 
 class Header extends React.Component {
     logout = () => {

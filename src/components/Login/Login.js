@@ -45,9 +45,9 @@ class Login extends React.Component {
             <div>
                 <div className='main-container'>
                     <div className='input-container'>
-                        <label className='login-label'>userNAME</label><input className='input1' placeholder='Enter name' name='username' value={username} onChange={this.handleChange}/>
+                        <label className='login-label'>Username:</label><input className='input1' placeholder='Enter name' name='username' value={username} onChange={this.handleChange}/>
                         <br/>
-                        <label className='login-label'>PASSWORD</label><input className='input2' type='password' placeholder='Enter password' name='password' value={password} onChange={this.handleChange}/>
+                        <label className='login-label'>Password:</label><input className='input2' type='password' placeholder='Enter password' name='password' value={password} onChange={this.handleChange}/>
                     
                         <div className='button-container'>
                             <button className='button' onClick={this.login}>Login</button>

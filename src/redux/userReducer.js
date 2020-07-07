@@ -17,9 +17,9 @@ export const login = (username, password) => {
     };
 };
 
-export const register = (firstname, lastname, username, password) => {
+export const register = (firstname, lastname, username, password, dateOfLastPeriod, dueDate, numOfWeeks, trimester) => {
     let data = axios
-        .post('/api/register', { firstname, lastname, username, password })
+        .post('/api/register', { firstname, lastname, username, password, dateOfLastPeriod, dueDate, numOfWeeks, trimester})
         .then(res => res.data);
     return {
         type: REGISTER,

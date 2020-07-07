@@ -33,6 +33,5 @@ app.post('/api/login', uc.login);
 app.post('/api/register', uc.register);
 app.delete('/api/logout', uc.logout);
 app.get('/api/user', authmw, uc.getUser);
-
 //user pregnancy details endpoints 
-app.get('/api/pregnancydetails', pdc.getPregDetails);
+//app.get('/api/pregnancydetails', pdc.getPregDetails);
