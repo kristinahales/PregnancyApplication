@@ -4,7 +4,10 @@ import {connect} from 'react-redux';
 import {register} from '../../redux/userReducer';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure()
 class Register extends Component {
     constructor() {
         super()
@@ -20,6 +23,7 @@ class Register extends Component {
             }
             this.register = this.register.bind(this);
             this.handleChange = this.handleChange.bind(this);
+            this.handleDate = this.handleDate.bind(this);
             this.calculateDueDate = this.calculateDueDate.bind(this);
             this.calculateNumOfWeeks = this.calculateNumOfWeeks.bind(this);
             this.calculateTrimester = this.calculateTrimester.bind(this);
@@ -32,16 +36,29 @@ class Register extends Component {
         })
     }
 
+    handleDate = date => {
+        this.setState({
+            dateOfLastPeriod: date
+        });
+        toast(`If date is correct, click Confirm to continue.`, {
+            position: "top-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            })
+    };
+
     resetInput() {
         this.setState({
             username: '',
             password: '',
             firstname: '',
-            lastname: '',
+            lastname: ''
         })
     }
 
-    register() {
+    register = () => {
         this.props.register(this.state.firstname, this.state.lastname, this.state.username, this.state.password, this.state.dateOfLastPeriod, this.state.dueDate, this.state.numOfWeeks, this.state.trimester)
         .catch(() => {
             alert('Username is already taken.');
@@ -49,21 +66,16 @@ class Register extends Component {
         })
     }
 
-    handleChanges = date => {
-        this.setState({
-            dateOfLastPeriod: date
-        });
-    this.calculateDueDate()
-      };
-
-      calculateDueDate() {
+    calculateDueDate() {
         console.log("period date to calculate due date" + this.state.dateOfLastPeriod)
         let ms = this.state.dateOfLastPeriod.getTime() + 24192000000;
         let dateDue = new Date(ms);
         this.setState({
             dueDate: dateDue
         })
-        this.calculateNumOfWeeks()
+        this.calculateNumOfWeeks();
+        
+        document.getElementById("registerButton").disabled = false;
     }
 
     calculateNumOfWeeks() {
@@ -74,7 +86,7 @@ class Register extends Component {
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
         console.log(diffDays + " days");
         this.setState({numOfWeeks: Math.floor(diffDays / 7)})
-        this.calculateTrimester()
+        this.calculateTrimester();
     }
 
     calculateTrimester() {
@@ -91,7 +103,6 @@ class Register extends Component {
         } else {
             this.setState({trimester: 3})
         }
-       
     }
 
 
@@ -102,6 +113,7 @@ class Register extends Component {
         let {firstname, lastname, username, password, dateOfLastPeriod} = this.state;
         let { user } = this.props;
         if (user.loggedIn) return <Redirect to="/" />;
+
         return (
             <div>
                 <label>First Name:</label><input name='firstname' value={firstname} onChange={this.handleChange}/><br/>
@@ -109,12 +121,9 @@ class Register extends Component {
                 <label className='login-label'>Username:</label><input className='input1' placeholder='Enter name' name='username' value={username} onChange={this.handleChange}/><br/>
                 <label className='login-label'>Password:</label><input className='input2' type='password' placeholder='Enter password' name='password' value={password} onChange={this.handleChange}/><br/>
                 <label>Date Of Last Period:</label>
-                <DatePicker
-        selected={dateOfLastPeriod}
-        onChange={this.handleChanges}
-      />
-      <button onClick={this.calculateDueDate}>DueDate</button>
-                <button className='button' onClick={this.register}>Register</button>
+                <DatePicker selected={dateOfLastPeriod} onChange={this.handleDate} />
+                <button onClick={this.calculateDueDate}>Confirm</button>
+                <button className='button' id="registerButton" onClick={this.register} disabled>Register</button>
                 <Link to='/login'>Already a member?</Link>
             </div>
         )
