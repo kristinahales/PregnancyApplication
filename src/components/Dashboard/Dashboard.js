@@ -12,14 +12,14 @@ class Dashboard extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     axios.get('/api/pregnancydetails')
-    //     .then(res => {
-    //         this.setState({
-    //             pregnancydetails: res.data
-    //         })
-    //     })
-    // }
+    componentDidMount() {
+        axios.get('/api/pregnancydetails')
+        .then(res => {
+            this.setState({
+                pregnancydetails: res.data
+            })
+        })
+    }
 
     render() {
         console.log(this.state.pregnancydetails)

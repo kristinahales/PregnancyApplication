@@ -40,7 +40,7 @@ class Register extends Component {
         this.setState({
             dateOfLastPeriod: date
         });
-        toast(`If date is correct, click Confirm to continue.`, {
+        toast(`Verify that the information that is listed is correct. If it is, click confirm to continue.`, {
             position: "top-center",
             autoClose: 4000,
             hideProgressBar: false,
@@ -74,8 +74,6 @@ class Register extends Component {
             dueDate: dateDue
         })
         this.calculateNumOfWeeks();
-        
-        document.getElementById("registerButton").disabled = false;
     }
 
     calculateNumOfWeeks() {
@@ -103,6 +101,8 @@ class Register extends Component {
         } else {
             this.setState({trimester: 3})
         }
+        document.getElementById("registerButton").hidden = false;
+        document.getElementById("confirmButton").hidden = true;
     }
 
 
@@ -122,8 +122,8 @@ class Register extends Component {
                 <label className='login-label'>Password:</label><input className='input2' type='password' placeholder='Enter password' name='password' value={password} onChange={this.handleChange}/><br/>
                 <label>Date Of Last Period:</label>
                 <DatePicker selected={dateOfLastPeriod} onChange={this.handleDate} />
-                <button onClick={this.calculateDueDate}>Confirm</button>
-                <button className='button' id="registerButton" onClick={this.register} disabled>Register</button>
+                <button onClick={this.calculateDueDate} id='confirmButton'>Confirm</button>
+                <button className='button' id="registerButton" onClick={this.register} hidden>Register</button>
                 <Link to='/login'>Already a member?</Link>
             </div>
         )

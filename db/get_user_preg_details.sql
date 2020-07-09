@@ -1,3 +1,7 @@
--- select b.size, b.item, b.babyimage, p.dateoflastperiod, p.duedate, p.trimester from baby_details b
--- join user_pregnancy_details p on p.numofweeks = b.numofweeksid 
--- where p.userid = $1;
+select u.*, s.* from users u
+join (select bd.*, cs.*
+    from baby_details as bd
+    join common_Symptoms as cs
+    on cs.numofweeks = bd.numofweeksid) as s on
+s.numofweeksid = u.numofweeks
+where u.userid = $1;
