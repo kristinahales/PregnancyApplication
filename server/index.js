@@ -36,3 +36,4 @@ app.get('/api/user', authmw, uc.getUser);
 
 //user pregnancy details endpoints 
 app.get('/api/pregnancydetails', pdc.getPregDetails);
+
