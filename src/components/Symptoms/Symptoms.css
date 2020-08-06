@@ -1,0 +1,27 @@
+.symptomsContainer {
+    background-color: #9C89B8;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.individualSymptom {
+    background: white;
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.symptom {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.symptomName {
+    color: white;
+}

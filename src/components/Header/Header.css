@@ -1,5 +1,6 @@
 .header-container {
     width: 100%;
-    height: 50px;
-    background-color: purple;
+    height: 200px;
+    background-color: #FFCAD4;
+    position: relative;
 }

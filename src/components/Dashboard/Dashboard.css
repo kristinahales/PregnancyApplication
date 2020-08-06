@@ -1,0 +1,28 @@
+body {
+    font-family: 'Raleway', sans-serif;
+}
+
+.headerContainer {
+    width: 100%;
+    height: 70px;
+    background: #EFC3E6;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headerText {
+    line-height: 3px;
+    color: white;
+}
+
+.numofweeks {
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+}
+
+img {
+    border-radius: 50%;
+}

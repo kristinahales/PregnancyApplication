@@ -1,29 +1,24 @@
 import React, {Component} from 'react';
+import '../Symptoms/Symptoms.css';
 
 class Symptoms extends Component {
-    constructor(props) {
-        super(props)
-            
-    }
-
-   
     render() {
         let symptomArray = [];    
-        this.props.pregnancydetails.map(item => {
-            symptomArray = item.symptoms;
-        })
+        this.props.pregnancydetails.map(item => symptomArray = item.symptoms)
 
         let symptoms = symptomArray.map(symptom => {
             return (
-                <div>
-                    <p>{symptom.symptom}</p>
+                <div className='individualSymptom' key={symptom.symptomid}>
+                    <img src={symptom.symptomimage} alt={symptom.symptom} height='150px' width='150px'/>
+                    <p className='symptom'>{symptom.symptom}</p>
                     <p>{symptom.description}</p>
-                    <img src={symptom.symptomimage} height='300px' width='300px'/>
+                   
                 </div>
             )
         }) 
         return (
-            <div>
+            <div className='symptomsContainer'>
+                <h2 className='symptomName'>Common Symptoms</h2>
                 {symptoms}
             </div>
         )

@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import Header from '../Header/Header'
 import Symptoms from '../Symptoms/Symptoms';
 import BabyDetails from '../BabyDetails/BabyDetails';
+import '../Dashboard/Dashboard.css';
 
 class Dashboard extends Component {
     constructor() {
@@ -12,6 +14,7 @@ class Dashboard extends Component {
             pregnancydetails: []
         }
         this.formatDate = this.formatDate.bind(this);
+        this.formatSize = this.formatSize.bind(this);
     }
 
     componentDidMount() {
@@ -22,6 +25,14 @@ class Dashboard extends Component {
             })
         })
     }
+
+    formatSize(numofweeks, item) {
+        if(numofweeks <= 2) {
+            return `Your baby ${item}!`
+        } else {
+            return `Your baby is the size of a ${item}!`
+        }
+    } 
 
     formatDate(timestamp){
         var x=new Date(timestamp);
@@ -37,9 +48,10 @@ class Dashboard extends Component {
         console.log(this.state.pregnancydetails)
         let details = this.state.pregnancydetails.map((item, i) => {
             return (
-                <div>
-                    <h1>{"Welcome Back " + item.firstname + "!"}</h1>
-                    <p>{"Your duedate is: " + this.formatDate(item.duedate)}</p>
+                <div key={item.numofweeks}>
+                    <p className='numofweeks'>{`${item.numofweeks} weeks pregnant`}</p>
+                    <p>{this.formatSize(item.numofweeks, item.item)}</p>
+                    {/* <p>{"Your duedate is: " + this.formatDate(item.duedate)}</p> */}
                 </div>
             )           
         })
@@ -47,9 +59,12 @@ class Dashboard extends Component {
         if (!this.props.user.user.loggedIn) return <Redirect to='/login'/>
         return (
             <div>
-                {details}
+                <div className='headerContainer'>
+                    <header className='headerText'>{details}</header>
+                </div>
                 <BabyDetails pregnancydetails={this.state.pregnancydetails}/>
-                <Symptoms pregnancydetails={this.state.pregnancydetails}/>
+                
+                <Symptoms pregnancydetails={this.state.pregnancydetails}/> 
             </div>
         )
     }
